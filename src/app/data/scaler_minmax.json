@@ -1,0 +1,5 @@
+{
+  "feature_order": ["Tem_BME280", "MP1.0_AtE", "CO2_MHZ19", "Rap_Viento"],
+  "data_min_": [-32.5, 0.0, 400.0, 0.0],
+  "data_max_": [57.5, 500.0, 5000.0, 13.2]
+}

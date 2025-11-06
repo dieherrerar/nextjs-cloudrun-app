@@ -1,0 +1,370 @@
+/* Botón dashboard-style azul para PDF */
+.dashboard-btn-blue {
+  background: #fff;
+  color: #184d2b;
+  border: 1.5px solid rgba(30, 80, 60, 0.18);
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 1.08rem;
+  padding: 0.7rem 2.1rem;
+  box-shadow: 0 1px 6px rgba(30, 144, 255, 0.04);
+  transition: box-shadow 0.18s, border-color 0.18s, color 0.18s,
+    background 0.18s;
+  outline: none;
+  cursor: pointer;
+}
+.dashboard-btn-blue:hover,
+.dashboard-btn-blue:focus {
+  border-color: #1e90ff;
+  color: #1e90ff;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(30, 144, 255, 0.1);
+}
+/* Botón dashboard-style para descarga CSV (blanco, hover verde) */
+.dashboard-btn {
+  background: #fff;
+  color: #184d2b;
+  border: 1.5px solid rgba(30, 80, 60, 0.18);
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 1.08rem;
+  padding: 0.7rem 2.1rem;
+  box-shadow: 0 1px 6px rgba(30, 80, 60, 0.04);
+  transition: box-shadow 0.18s, border-color 0.18s, color 0.18s,
+    background 0.18s;
+  outline: none;
+  cursor: pointer;
+}
+.dashboard-btn:hover,
+.dashboard-btn:focus {
+  border-color: #2ecc71;
+  color: #2ecc71;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(30, 80, 60, 0.1);
+}
+
+/* Small variant for inline/dashboard small buttons (keeps btn-sm sizing) */
+.dashboard-btn-save {
+  background: #fff;
+  color: #184d2b;
+  border: 1.5px solid rgba(30, 80, 60, 0.18);
+  border-radius: 8px;
+  font-weight: 600;
+  /* font-size left to btn-sm */
+  padding: 0.35rem 0.8rem;
+  box-shadow: 0 1px 6px rgba(30, 80, 60, 0.04);
+  transition: box-shadow 0.18s, border-color 0.18s, color 0.18s,
+    background 0.18s;
+  outline: none;
+  cursor: pointer;
+}
+.dashboard-btn-save:hover,
+.dashboard-btn-save:focus {
+  border-color: #2ecc71;
+  color: #2ecc71;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(30, 80, 60, 0.1);
+}
+
+.dashboard-btn-cancel {
+  background: #fff;
+  color: #7a1d1d;
+  border: 1.5px solid rgba(122, 29, 29, 0.12);
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 0.35rem 0.8rem;
+  box-shadow: 0 1px 6px rgba(122, 29, 29, 0.02);
+  transition: box-shadow 0.18s, border-color 0.18s, color 0.18s,
+    background 0.18s;
+  outline: none;
+  cursor: pointer;
+}
+.dashboard-btn-cancel:hover,
+.dashboard-btn-cancel:focus {
+  border-color: #ff3b3b;
+  color: #ff3b3b;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(255, 59, 59, 0.08);
+}
+/* Estilo de fuente y color para tablas del dashboard */
+.dashboard-chart-container table,
+.dashboard-chart-container th,
+.dashboard-chart-container td {
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  color: #184d2b;
+  font-size: 1rem;
+}
+.dashboard-chart-container th {
+  font-weight: 600;
+  background: #eafaf1;
+}
+.dashboard-chart-container td {
+  background: #fff;
+}
+/* Borde fino y sutil para los gráficos del dashboard */
+.dashboard-chart-container {
+  border: 1px solid rgba(30, 80, 60, 0.18);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(30, 80, 60, 0.04);
+  padding: 1.2rem 1.2rem 0.7rem 1.2rem;
+  margin-bottom: 0.5rem;
+  transition: box-shadow 0.18s;
+}
+.dashboard-chart-container:hover {
+  box-shadow: 0 4px 18px rgba(30, 80, 60, 0.1);
+}
+/* Spinner for EcoPulse dashboard loading */
+.spinner-ecopulse {
+  width: 60px;
+  height: 60px;
+  border: 7px solid #e0e7ef;
+  border-top: 7px solid #1e90ff;
+  border-radius: 50%;
+  animation: spin-ecopulse 1s linear infinite;
+  margin-bottom: 1.5rem;
+}
+
+@keyframes spin-ecopulse {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* Borde fino y sutil para las KPI cards */
+.Kpicard {
+  border: 1px solid rgba(30, 80, 60, 0.18);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(30, 80, 60, 0.04);
+  transition: box-shadow 0.18s;
+}
+.Kpicard:hover {
+  box-shadow: 0 4px 18px rgba(30, 80, 60, 0.1);
+}
+/* Navbar más alto */
+.navbar {
+  min-height: 72px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+.card .card-title,
+.card .card-text {
+  color: #184d2b;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.15);
+  transition: color 0.2s cubic-bezier(0.4, 2, 0.6, 1);
+}
+
+.card:hover .card-title,
+.card:hover .card-text {
+  color: #2ecc71;
+}
+
+.card:hover {
+  transform: translateY(-12px) scale(1.04);
+  box-shadow: 0 8px 32px rgba(30, 80, 60, 0.18);
+  border-color: #2ecc71;
+}
+#carouselExampleCaptions {
+  margin: 30px auto 0 auto;
+}
+
+.card {
+  flex: 0 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  border-width: 5px;
+  border-color: rgb(23, 81, 33);
+  background: rgba(255, 255, 255, 0);
+  background: linear-gradient(135deg, #e0ffe6 0%, #b2f0c0 100%);
+  border: 2px solid #1d6d1b;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(30, 80, 60, 0.08);
+  transition: transform 0.2s cubic-bezier(0.4, 2, 0.6, 1),
+    box-shadow 0.2s cubic-bezier(0.4, 2, 0.6, 1);
+  cursor: pointer;
+}
+
+.card-body {
+  background: transparent;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 100px;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 30px;
+  margin-top: 70px;
+}
+
+@media (max-width: 900px) {
+  .card {
+    flex-basis: 45%;
+    max-width: 48%;
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}
+#carouselExampleCaptions .carousel-caption h1 {
+  font-size: 4.5rem;
+}
+
+#carouselExampleCaptions .carousel-caption h5 {
+  font-size: 2.2rem;
+}
+
+#carouselExampleCaptions .carousel-caption p {
+  font-size: 1.5rem;
+}
+#carouselExampleCaptions .ecopulse-title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  letter-spacing: 0.05em;
+}
+
+#carouselExampleCaptions .ecopulse-subtitle {
+  font-size: 1.5rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  margin-top: 0.5rem;
+  text-align: center;
+}
+#carouselExampleCaptions {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  width: 95%;
+  height: 75vh;
+  min-height: 400px;
+  max-height: 900px;
+  margin: 30px auto 0 auto;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(2px);
+}
+@media (max-width: 600px) {
+  #carouselExampleCaptions {
+    width: 98%;
+    height: 38%;
+    min-height: 120px;
+    margin: 2% auto;
+  }
+}
+
+#carouselExampleCaptions .carousel-item {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+#carouselExampleCaptions .carousel-inner {
+  height: 100%;
+  min-height: 400px;
+  max-height: 900px;
+}
+
+#carouselExampleCaptions .carousel-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  max-height: 900px;
+  object-fit: cover;
+}
+
+#carouselExampleCaptions .carousel-item .carousel-img-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 150, 55, 0.4), rgba(0, 150, 57, 0.2));
+  z-index: 2;
+  pointer-events: none;
+}
+
+#carouselExampleCaptions .carousel-caption {
+  position: absolute;
+  z-index: 3;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Fix mobile navbar collapse overlay: opaque background and high z-index */
+@media (max-width: 991px) {
+  .navbar {
+    position: relative;
+    z-index: 2200; /* ensure navbar sits above page content */
+  }
+
+  /* Make the collapsed menu an overlay with solid/dark background so it's visible */
+  .navbar .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(13, 13, 13, 0.96); /* almost solid to avoid transparency */
+    padding: 0.75rem 1rem;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    z-index: 2199;
+  }
+
+  .navbar .navbar-nav {
+    width: 100%;
+  }
+
+  .navbar .navbar-nav .nav-link {
+    color: #fff !important;
+    padding: 0.75rem 0.5rem;
+    display: block;
+  }
+
+  /* Ensure logout link stays red even when other rules try to override color */
+  .navbar .logout-link,
+  .navbar .logout-link:link,
+  .navbar .logout-link:visited,
+  .navbar .logout-link:hover,
+  .navbar .logout-link:active {
+    color: #ff3b3b !important;
+    font-weight: 700;
+  }
+
+  /* Ensure toggler sits above the collapse when animating */
+  .navbar .navbar-toggler {
+    z-index: 2201;
+  }
+
+  /* Dropdown menus inside navbar should also be visible above content */
+  .navbar .dropdown-menu {
+    position: static; /* flow inside the collapse */
+    background: transparent;
+    box-shadow: none;
+  }
+}
+
+#carouselExampleCaptions .carousel-caption-center {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  transform: translateY(-50px);
+}

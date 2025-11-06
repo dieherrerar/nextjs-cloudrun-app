@@ -1,0 +1,17 @@
+    }
+    checkAuth();
+  }, []);
+
+  //cargar fechas desde la BD
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch("/api/dates", { cache: "no-store" });
+        const jsonr = await response.json();
+        if (jsonr.success && jsonr.dates.length > 0) {
+          setDates(jsonr.dates);
+          setSelectedDate(jsonr.dates[jsonr.dates.length - 1]); // última fecha
+          setError(null);
+        } else {
+          setError("No hay fechas disponibles.");
+        }

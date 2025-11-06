@@ -1,0 +1,17 @@
+    1: import { query } from "../../lib/db";
+    2: import { NextResponse } from "next/server";
+    3: 
+    4: export async function GET() {
+    5:   try {
+    6:     const result = await query(
+    7:       "SELECT DISTINCT CAST(fecha_registro AS DATE) AS fecha FROM datos_dispositivo ORDER BY fecha ASC;"
+    8:     );
+    9: 
+   10:     const dates = result.rows.map((row) => row.fecha);
+   11: 
+   12:     return NextResponse.json({ success: true, dates });
+   13:   } catch (error) {
+   14:     const errorMessage = error instanceof Error ? error.message : String(error);
+   15:     return NextResponse.json({ success: false, error: errorMessage });
+   16:   }
+   17: }

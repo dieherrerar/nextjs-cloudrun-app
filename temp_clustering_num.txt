@@ -1,0 +1,174 @@
+   1: "use client";
+   2: import { useEffect, useState } from "react";
+   3: import DownloadPDF from "../../../components/DownloadPDF";
+   4: // ⬇️ nuevo: usa el componente 3D
+   5: import Cluster3D from "../../../components/charts/Cluster3D";
+   6: import FullPageLoader from "../../../components/FullPageLoader";
+   7: 
+   8: const POLL_MS = 120_000;
+   9: 
+  10: export default function ClusterrPage() {
+  11:   const [dates, setDates] = useState<string[]>([]);
+  12:   const [selectedDate, setSelectedDate] = useState<string>("");
+  13:   const [points, setPoints] = useState<any[]>([]);
+  14:   const [centroids, setCentroids] = useState<any[]>([]);
+  15:   const [features, setFeatures] = useState<string[]>([
+  16:     "Tem_BME280",
+  17:     "MP1.0_AtE",
+  18:     "CO2_MHZ19",
+  19:     "Rap_Viento",
+  20:   ]);
+  21:   const [loading, setLoading] = useState(true);
+  22:   const [err, setErr] = useState<string | null>(null);
+  23:   const [isAdmin, setIsAdmin] = useState(false);
+  24: 
+  25:   //Verificar si el usuario es admin
+  26:   useEffect(() => {
+  27:     async function checkAuth() {
+  28:       try {
+  29:         const res = await fetch("/api/auth/validate", { cache: "no-store" });
+  30:         const j = await res.json();
+  31:         setIsAdmin(j?.isAdmin === true);
+  32:       } catch {
+  33:         setIsAdmin(false);
+  34:       }
+  35:     }
+  36:   });
+  37: 
+  38:   //extrae las fechas disponibles en la base de datos
+  39:   useEffect(() => {
+  40:     (async () => {
+  41:       try {
+  42:         const res = await fetch("/api/dates", { cache: "no-store" });
+  43:         const json = await res.json();
+  44:         if (
+  45:           json.success &&
+  46:           Array.isArray(json.dates) &&
+  47:           json.dates.length > 0
+  48:         ) {
+  49:           setDates(json.dates);
+  50:           setSelectedDate(json.dates[json.dates.length - 1]); // última fecha
+  51:         }
+  52:       } catch (e) {
+  53:         console.error(e);
+  54:       }
+  55:     })();
+  56:   }, []);
+  57: 
+  58:   //cuando cambia la fecha seleccionada, carga los datos de clusters y centroides
+  59:   useEffect(() => {
+  60:     (async () => {
+  61:       if (!selectedDate) return;
+  62:       setLoading(true);
+  63:       setErr(null);
+  64:       try {
+  65:         const r = await fetch(`/api/clusters?date=${selectedDate}`, {
+  66:           cache: "no-store",
+  67:         });
+  68:         const j = await r.json();
+  69:         if (!r.ok) throw new Error(j?.error || "Error al cargar clusters");
+  70:         setPoints(j.points ?? []);
+  71:         setCentroids(j.centroids ?? []);
+  72:         // si el backend envía features, úsalo
+  73:         if (Array.isArray(j.features) && j.features.length >= 4) {
+  74:           setFeatures(j.features);
+  75:         }
+  76:       } catch (e: any) {
+  77:         setErr(e.message ?? "Error");
+  78:       } finally {
+  79:         setLoading(false);
+  80:       }
+  81:     })();
+  82:   }, [selectedDate]);
+  83: 
+  84:   //polling para actualizar datos cada POLL_MS milisegundos
+  85:   useEffect(() => {
+  86:     if (!selectedDate) return;
+  87: 
+  88:     const id = setInterval(async () => {
+  89:       try {
+  90:         const r = await fetch(`/api/clusters?date=${selectedDate}`, {
+  91:           cache: "no-store",
+  92:         });
+  93:         const j = await r.json();
+  94:         if (r.ok) {
+  95:           setPoints(j.points ?? []);
+  96:           setCentroids(j.centroids ?? []);
+  97:           if (Array.isArray(j.features) && j.features.length >= 4) {
+  98:             setFeatures(j.features);
+  99:           }
+ 100:         }
+ 101:       } catch (err) {
+ 102:         console.warn("Error actualizando clusters:", err);
+ 103:       }
+ 104:     }, POLL_MS);
+ 105: 
+ 106:     return () => clearInterval(id);
+ 107:   }, [selectedDate]);
+ 108: 
+ 109:   if (loading) {
+ 110:     return <FullPageLoader message={"Cargando gráfico de patrones..."} />;
+ 111:   }
+ 112: 
+ 113:   return (
+ 114:     <div>
+ 115:       <div className="container py-4" id="cluster-root">
+ 116:         {/* Título con misma jerarquía visual */}
+ 117:         <h2 className="mb-3 text-center">
+ 118:           Patrones Ambientales Detectados (Clusters y Centroides)
+ 119:         </h2>
+ 120: 
+ 121:         {/* Selector de fecha con el mismo estilo del dashboard */}
+ 122:         <div className="mb-4">
+ 123:           <select
+ 124:             id="fecha"
+ 125:             className="form-select"
+ 126:             value={selectedDate}
+ 127:             onChange={(e) => setSelectedDate(e.target.value)}
+ 128:           >
+ 129:             <option value="" disabled>
+ 130:               Selecciona fecha
+ 131:             </option>
+ 132:             {dates.map((date) => {
+ 133:               const formatted = new Date(date).toLocaleDateString("es-CL");
+ 134:               return (
+ 135:                 <option key={date} value={date}>
+ 136:                   {formatted}
+ 137:                 </option>
+ 138:               );
+ 139:             })}
+ 140:           </select>
+ 141:         </div>
+ 142: 
+ 143:         {/* Gráfico 3D (X=Tem, Y=MP1.0, Z=CO2, Tamaño=Rap_Viento) */}
+ 144:         <div className="dashboard-chart-container">
+ 145:           <Cluster3D
+ 146:             points={points}
+ 147:             centroids={centroids}
+ 148:             features={features}
+ 149:             xKey="Tem_BME280"
+ 150:             yKey="MP1.0_AtE"
+ 151:             zKey="CO2_MHZ19"
+ 152:             sizeKey="Rap_Viento"
+ 153:             title=""
+ 154:           />
+ 155:         </div>
+ 156:       </div>
+ 157: 
+ 158:       {!isAdmin && (
+ 159:         <div id="ButtonPDF" className="mb-4">
+ 160:           <div className="container">
+ 161:             <div className="d-flex gap-3 flex-wrap">
+ 162:               <DownloadPDF
+ 163:                 targetId="container py-4"
+ 164:                 fileName={"eco_clustering" + selectedDate}
+ 165:                 hideSelectors={["#fecha", "#ButtonPDF"]}
+ 166:                 btnClassName="dashboard-btn-blue"
+ 167:               />
+ 168:             </div>
+ 169:           </div>
+ 170:         </div>
+ 171:       )}
+ 172:     </div>
+ 173:   );
+ 174: }

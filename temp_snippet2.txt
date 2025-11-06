@@ -1,0 +1,1 @@
+  // Inicializa el rango con la fecha seleccionada por defecto  useEffect(() => {     if (selectedDate) {       setPendingStartDate(selectedDate);       setPendingEndDate(selectedDate);       setAppliedStartDate(selectedDate);       setAppliedEndDate(selectedDate);     }   }, [selectedDate]);    // Acción del botón "Filtrar"
