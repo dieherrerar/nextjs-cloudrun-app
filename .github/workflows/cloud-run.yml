@@ -49,15 +49,15 @@ jobs:
         run: |
           rm -f .env.deploy
           {
-            echo "NODE_ENV=production"
-            echo "NEXT_TELEMETRY_DISABLED=1"
-            echo "DB_USER=${{ secrets.DB_USER }}"
-            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}"
-            echo "DB_HOST=${{ secrets.DB_HOST }}"
-            echo "DB_PORT=${{ secrets.DB_PORT }}"
-            echo "DB_NAME=${{ secrets.DB_NAME }}"
-            echo "JWT_SECRET=${{ secrets.JWT_SECRET }}"
-            echo "APIKEY=${{ secrets.APIKEY }}"
+            echo "NODE_ENV: production"
+            echo "NEXT_TELEMETRY_DISABLED: \"1\""
+            echo "DB_USER: \"${{ secrets.DB_USER }}\""
+            echo "DB_PASSWORD: \"${{ secrets.DB_PASSWORD }}\""
+            echo "DB_HOST: \"${{ secrets.DB_HOST }}\""
+            echo "DB_PORT: \"${{ secrets.DB_PORT }}\""
+            echo "DB_NAME: \"${{ secrets.DB_NAME }}\""
+            echo "JWT_SECRET: \"${{ secrets.JWT_SECRET }}\""
+            echo "APIKEY: \"${{ secrets.APIKEY }}\""
           } >> .env.deploy
 
       - name: Deploy to Cloud Run
