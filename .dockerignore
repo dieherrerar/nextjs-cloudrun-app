@@ -1,0 +1,30 @@
+# Carpetas grandes / locales
+node_modules
+.next
+dist
+.cache
+
+# Archivos de configuración locales
+Dockerfile
+.dockerignore
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Control de versiones
+.git
+.gitignore
+
+# Variables y secretos
+.env
+.env.*
+!.env.example    # <-- deja pasar el ejemplo, no el real
+
+# Archivos del sistema / IDE
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Archivos del build anterior
+coverage/
