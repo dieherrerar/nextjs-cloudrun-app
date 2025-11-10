@@ -41,7 +41,7 @@ export default async function HomePage() {
           }
         />
         <Card
-          title={"Análizis de Alertas"}
+          title={"Análisis de Alertas"}
           description={
             "Consulta y analiza las alertas medioambientales emitidas en función de los datos recolectados en una fecha determinada."
           }
